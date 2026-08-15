@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="528" viewBox="0 0 780 528" font-family="system-ui,Segoe UI,Arial,sans-serif">
+<rect x="0" y="0" width="780" height="528" rx="12" fill="#ffffff" stroke="#E5E7EB"/>
+<text x="24" y="34" font-size="19" font-weight="700" fill="#111827">Text &amp; Agent benchmarks (higher is better)</text>
+<rect x="24" y="52" width="13" height="13" rx="3" fill="#4C6FFF"/>
+<text x="43" y="63" font-size="12" fill="#374151">Qwen3.8-27B</text>
+<rect x="143.2" y="52" width="13" height="13" rx="3" fill="#9AA7BD"/>
+<text x="162.2" y="63" font-size="12" fill="#374151">Qwen3.6-27B</text>
+<rect x="262.4" y="52" width="13" height="13" rx="3" fill="#F0883E"/>
+<text x="281.4" y="63" font-size="12" fill="#374151">Opus4.6 Max</text>
+<line x1="200.0" y1="88" x2="200.0" y2="504" stroke="#EEF0F3"/>
+<text x="200.0" y="520" font-size="11" fill="#9AA7BD" text-anchor="middle">0</text>
+<line x1="334.0" y1="88" x2="334.0" y2="504" stroke="#EEF0F3"/>
+<text x="334.0" y="520" font-size="11" fill="#9AA7BD" text-anchor="middle">25</text>
+<line x1="468.0" y1="88" x2="468.0" y2="504" stroke="#EEF0F3"/>
+<text x="468.0" y="520" font-size="11" fill="#9AA7BD" text-anchor="middle">50</text>
+<line x1="602.0" y1="88" x2="602.0" y2="504" stroke="#EEF0F3"/>
+<text x="602.0" y="520" font-size="11" fill="#9AA7BD" text-anchor="middle">75</text>
+<line x1="736.0" y1="88" x2="736.0" y2="504" stroke="#EEF0F3"/>
+<text x="736.0" y="520" font-size="11" fill="#9AA7BD" text-anchor="middle">100</text>
+<text x="188" y="122.5" font-size="13" fill="#111827" text-anchor="end">SWE-bench Pro</text>
+<rect x="200" y="96" width="330.7" height="13" rx="2.5" fill="#4C6FFF"/>
+<text x="535.7" y="106.5" font-size="11" fill="#374151">61.7</text>
+<rect x="200" y="112" width="286.8" height="13" rx="2.5" fill="#9AA7BD"/>
+<text x="491.8" y="122.5" font-size="11" fill="#374151">53.5</text>
+<rect x="200" y="128" width="286.2" height="13" rx="2.5" fill="#F0883E"/>
+<text x="491.2" y="138.5" font-size="11" fill="#374151">53.4</text>
+<text x="188" y="189.5" font-size="13" fill="#111827" text-anchor="end">QwenSWEBench</text>
+<rect x="200" y="163" width="423.4" height="13" rx="2.5" fill="#4C6FFF"/>
+<text x="628.4" y="173.5" font-size="11" fill="#374151">79</text>
+<rect x="200" y="179" width="264.2" height="13" rx="2.5" fill="#9AA7BD"/>
+<text x="469.2" y="189.5" font-size="11" fill="#374151">49.3</text>
+<rect x="200" y="195" width="342.0" height="13" rx="2.5" fill="#F0883E"/>
+<text x="547.0" y="205.5" font-size="11" fill="#374151">63.8</text>
+<text x="188" y="256.5" font-size="13" fill="#111827" text-anchor="end">LiveCodeBench v6</text>
+<rect x="200" y="230" width="484.0" height="13" rx="2.5" fill="#4C6FFF"/>
+<text x="689.0" y="240.5" font-size="11" fill="#374151">90.3</text>
+<rect x="200" y="246" width="449.7" height="13" rx="2.5" fill="#9AA7BD"/>
+<text x="654.7" y="256.5" font-size="11" fill="#374151">83.9</text>
+<rect x="200" y="262" width="476.0" height="13" rx="2.5" fill="#F0883E"/>
+<text x="681.0" y="272.5" font-size="11" fill="#374151">88.8</text>
+<text x="188" y="323.5" font-size="13" fill="#111827" text-anchor="end">IFBench</text>
+<rect x="200" y="297" width="426.1" height="13" rx="2.5" fill="#4C6FFF"/>
+<text x="631.1" y="307.5" font-size="11" fill="#374151">79.5</text>
+<rect x="200" y="313" width="370.4" height="13" rx="2.5" fill="#9AA7BD"/>
+<text x="575.4" y="323.5" font-size="11" fill="#374151">69.1</text>
+<rect x="200" y="329" width="335.0" height="13" rx="2.5" fill="#F0883E"/>
+<text x="540.0" y="339.5" font-size="11" fill="#374151">62.5</text>
+<text x="188" y="390.5" font-size="13" fill="#111827" text-anchor="end">GPQA Diamond</text>
+<rect x="200" y="364" width="478.1" height="13" rx="2.5" fill="#4C6FFF"/>
+<text x="683.1" y="374.5" font-size="11" fill="#374151">89.2</text>
+<rect x="200" y="380" width="470.6" height="13" rx="2.5" fill="#9AA7BD"/>
+<text x="675.6" y="390.5" font-size="11" fill="#374151">87.8</text>
+<rect x="200" y="396" width="489.4" height="13" rx="2.5" fill="#F0883E"/>
+<text x="694.4" y="406.5" font-size="11" fill="#374151">91.3</text>
+<text x="188" y="457.5" font-size="13" fill="#111827" text-anchor="end">Terminal Bench 2.1</text>
+<rect x="200" y="431" width="391.3" height="13" rx="2.5" fill="#4C6FFF"/>
+<text x="596.3" y="441.5" font-size="11" fill="#374151">73</text>
+<rect x="200" y="447" width="339.8" height="13" rx="2.5" fill="#9AA7BD"/>
+<text x="544.8" y="457.5" font-size="11" fill="#374151">63.4</text>
+<rect x="200" y="463" width="419.2" height="13" rx="2.5" fill="#F0883E"/>
+<text x="624.2" y="473.5" font-size="11" fill="#374151">78.2</text>
+</svg>
