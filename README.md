@@ -53,8 +53,13 @@ No HF secret needed — the model repo is public.
 
 ## Notes / knobs
 
-- **Context**: capped at 32K (`MAX_MODEL_LEN` in `serve.py`) to fit KV cache next to the weights on 48GB. Native is 262K; raise if you need it and watch for OOM.
-- **Reasoning / tools**: tool calling is on (`--enable-auto-tool-choice --tool-call-parser hermes`) so OpenAI-style `tools` + `tool_choice:"auto"` work. Thinking still streams inline; to split it into `reasoning_content`, add `--reasoning-parser qwen3` in `serve.py`.
+- **Context**: capped at 64K (`MAX_MODEL_LEN` in `serve.py`). Native is 262K; KV cache is ~17GB at 64K and ~34GB at 128K, and the live footprint is already ~42GB of the 80GB — so 128K OOMs on one A100.
+- **Reasoning / tools**: tool calling is on (`--enable-auto-tool-choice --tool-call-parser qwen3_xml`) so OpenAI-style `tools` + `tool_choice:"auto"` work. Parser must be `qwen3_xml`, not `hermes` — this model's chat template emits XML calls (`<tool_call><function=f><parameter=p>`), and `hermes` tries `json.loads` on that and fails every call.
+- **Thinking is off** by default here, via `--default-chat-template-kwargs '{"enable_thinking": false}'` in `serve.py` (the model thinks by default — thinking tokens are GPU seconds you pay for). Turn it back on:
+  - **per request** (wins over the server default): `extra_body={"chat_template_kwargs": {"enable_thinking": True}}`
+  - **server-wide**: delete that flag from `serve.py` and redeploy. Then add `--reasoning-parser qwen3` if you want thinking split into `reasoning_content` instead of streamed inline.
+
+  Recommended sampling differs per mode — non-thinking: `temperature=0.7, top_p=0.8, top_k=20`; thinking: use the model card's thinking values. Also `reasoning_effort` (`low`/`medium`/`xhigh`) controls depth when thinking is on.
 - **Vision**: it's a VL model; vLLM accepts images via the OpenAI `image_url` content type out of the box.
 - **vLLM version**: pinned to `0.25.1`. If boot fails with an unknown-architecture error, bump the pin in `serve.py` to a release that supports Qwen3.8.
 - **FlashInfer sampler**: disabled via `VLLM_USE_FLASHINFER_SAMPLER=0` — it JIT-compiles a CUDA kernel at boot and crashes on the slim image (`Could not find nvcc`). Native Torch sampler is used instead. If another nvcc JIT error appears, switch the image base to `nvidia/cuda:12.8.1-devel` + `CUDA_HOME` (see comment in `serve.py`).

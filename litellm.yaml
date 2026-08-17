@@ -1,0 +1,14 @@
+# Anthropic <-> OpenAI bridge so Claude Code can talk to the vLLM endpoint.
+# vLLM serves /v1/chat/completions; Claude Code calls /v1/messages. LiteLLM
+# proxy exposes both, so it translates.
+#
+#   pip install "litellm[proxy]"
+#   litellm --config litellm.yaml --port 4000
+#
+# ponytail: no auth, no DB, no caching — localhost-only dev proxy.
+model_list:
+  - model_name: qwen3.8-27b
+    litellm_params:
+      model: openai/qwen3.8-27b
+      api_base: https://praneshmadhan646--qwen38-27b-serve-serve.modal.run/v1
+      api_key: not-needed

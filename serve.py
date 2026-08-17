@@ -8,8 +8,10 @@ MODELS_DIR = "/models"
 MODEL_PATH = f"{MODELS_DIR}/{MODEL_REPO.split('/')[-1]}"
 SERVED_NAME = "qwen3.8-27b"
 # Native context is 262144; capped here so the KV cache fits alongside the
-# ~21GB weights on one 48GB L40S. Raise if you have headroom / need long ctx.
-MAX_MODEL_LEN = 32768
+# ~21GB weights on one A100-80GB. 64K needs ~17GB of KV — fits next to the
+# ~42GB live footprint. 128K would need ~34GB and OOMs. Coding agents (Claude
+# Code) need this much: their system prompt + tool schemas alone are ~40K.
+MAX_MODEL_LEN = 65536
 
 # AWQ (compressed-tensors) uses precompiled Marlin kernels — no nvcc/DeepGEMM
 # needed. FlashInfer's *sampler*, though, JIT-compiles a CUDA kernel at boot and
@@ -62,8 +64,17 @@ def serve():
         # Tool calling: clients (e.g. turnloop) send tool_choice="auto", which
         # vLLM rejects unless these are set. Qwen3 uses the hermes parser.
         "--enable-auto-tool-choice",
-        "--tool-call-parser", "hermes",
-        # To also split thinking into reasoning_content, add:
+        # This model's chat template emits XML tool calls
+        # (<tool_call><function=f><parameter=p>...), NOT the JSON body hermes
+        # expects — hermes throws JSONDecodeError on every call. qwen3_xml
+        # parses the XML form.
+        "--tool-call-parser", "qwen3_xml",
+        # Thinking is ON by default in this model. Off server-wide (cheaper: no
+        # thinking tokens billed as GPU time). Per-request override still wins:
+        #   extra_body={"chat_template_kwargs": {"enable_thinking": True}}
+        # Delete these two lines to get thinking back as the default.
+        "--default-chat-template-kwargs", '{"enable_thinking": false}',
+        # To split thinking into reasoning_content when it IS on, add:
         #   "--reasoning-parser", "qwen3"
     ]
     subprocess.Popen(cmd)
